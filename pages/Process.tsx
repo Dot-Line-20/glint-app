@@ -13,7 +13,7 @@ export default function Process({ title, info, children }: Props) {
   const navigation = useContext(NavigationContext)
   return (
     <View px="25px" py="63px">
-      <VStack safeArea>
+      <VStack>
         <Pressable 
           onPress={() => navigation?.goBack()}
           w="12px"
@@ -30,7 +30,7 @@ export default function Process({ title, info, children }: Props) {
           {info}
         </Text>
       </VStack>
-      {children}
+      {children}  
     </View>
   )
 }

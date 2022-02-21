@@ -13,7 +13,8 @@ export default function App() {
   
   let [fontLoaded, error] = useFonts({
     'Pretendard-Bold': require('./assets/fonts/Pretendard-Bold.otf'),
-    'Pretendard-Medium': require('./assets/fonts/Pretendard-Medium.otf')
+    'Pretendard-Medium': require('./assets/fonts/Pretendard-Medium.otf'),
+    'Pretendard-Light': require('./assets/fonts/Pretendard-Light.otf')
   })
 
   if(!fontLoaded) {

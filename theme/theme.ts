@@ -8,6 +8,9 @@ const typography = {
       },
       700: {
         normal: 'Pretendard-Bold'
+      },
+      500: {
+        normal: 'Pretendard-Lite'
       }
     },
   },
@@ -20,6 +23,9 @@ const typography = {
 
 const theme = extendTheme({
   ...typography,
+  letterSpacings: {
+    md: '-0.6px'
+  }
 })
 
 export default theme
