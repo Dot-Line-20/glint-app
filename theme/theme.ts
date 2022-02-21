@@ -1,18 +1,25 @@
-import { extendTheme } from "native-base";
+import { extendTheme } from 'native-base'
 
 const typography = {
-  fonts: {
-    heading: 'Pretendard-Bold',
-    body: 'Pretendard-Bold',
-    mono: 'Pretendard-Bold'
+  fontConfig: {
+    'Pretendard': {
+      600: {
+        normal: 'Pretendard-Medium'
+      },
+      700: {
+        normal: 'Pretendard-Bold'
+      }
+    },
   },
-  letterSpacings: {
-    md: "0"
-  }
+  fonts: {
+    heading: 'Pretendard',
+    body: 'Pretendard',
+    mono: 'Pretendard',
+  },
 }
 
 const theme = extendTheme({
-  ...typography
+  ...typography,
 })
 
 export default theme

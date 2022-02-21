@@ -4,14 +4,13 @@ import React from 'react'
 import Process from './Process'
 import { Text, Button } from 'native-base'
 
-import type { NativeStackScreenProps } from '@react-navigation/native-stack'
-type Props = NativeStackScreenProps<any, any>
+// import type { NativeStackScreenProps } from '@react-navigation/native-stack'
+// type Props = NativeStackScreenProps<any, any>
 // const Stack = createNativeStackNavigator()
 
-export default function Login({navigation}: Props) {
+export default function Login() {
   return (
-    <Process title="로그인" info="some info">
-      <Button onPress={() => navigation.goBack()}>go back</Button>
+    <Process title="로그인" info="홍보용 문구">
       <Text>hi!!</Text>
     </Process>
     // <NavigationContainer>
