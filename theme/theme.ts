@@ -2,16 +2,16 @@ import { extendTheme } from 'native-base'
 
 const typography = {
   fontConfig: {
-    'Pretendard': {
+    Pretendard: {
       600: {
-        normal: 'Pretendard-Medium'
+        normal: 'Pretendard-Medium',
       },
       700: {
-        normal: 'Pretendard-Bold'
+        normal: 'Pretendard-Bold',
       },
       500: {
-        normal: 'Pretendard-Lite'
-      }
+        normal: 'Pretendard-Lite',
+      },
     },
   },
   fonts: {
@@ -24,8 +24,8 @@ const typography = {
 const theme = extendTheme({
   ...typography,
   letterSpacings: {
-    md: '-0.6px'
-  }
+    md: '-0.01em',
+  },
 })
 
 export default theme
