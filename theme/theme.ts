@@ -10,7 +10,7 @@ const typography = {
         normal: 'Pretendard-Bold',
       },
       500: {
-        normal: 'Pretendard-Lite',
+        normal: 'Pretendard-Light',
       },
     },
   },
@@ -45,3 +45,4 @@ const theme = extendTheme({
 })
 
 export default theme
+export { colors }

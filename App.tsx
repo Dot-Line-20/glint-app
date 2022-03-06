@@ -3,8 +3,9 @@ import { NativeBaseProvider, Text } from 'native-base'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Initial from './routers/Initial'
-import { useFonts, loadAsync } from 'expo-font'
+import { useFonts } from 'expo-font'
 import AppLoading from 'expo-app-loading'
+import { StatusBar } from 'expo-status-bar'
 import theme from './theme/theme'
 
 const Stack = createNativeStackNavigator()
@@ -29,6 +30,7 @@ export default function App() {
         </Stack.Navigator>
       </NavigationContainer> */}
       <Initial />
+      <StatusBar hidden={true}/>
     </NativeBaseProvider> 
   )
 }

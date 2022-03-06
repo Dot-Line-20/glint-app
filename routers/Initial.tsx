@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { View, Center, Text, Button } from 'native-base'
 import type { NativeStackScreenProps } from '@react-navigation/native-stack'
@@ -33,9 +33,17 @@ function InitialScreen({ navigation }: Props) {
   )
 }
 
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: '#fff',
+  },
+}
+
 export default function Initial() {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={theme}>
       <Stack.Navigator
         initialRouteName="InitialScreen"
         screenOptions={{ headerShown: false }}>
