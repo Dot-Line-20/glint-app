@@ -11,16 +11,19 @@ import FormInput from '../components/FormInput'
 
 export default function Login() {
   return (
-    <Process title="로그인" info="홍보용 문구">
+    <Process title="로그인" info="홍보용 문구" button={{
+      title: '로그인',
+      position: 'stick'
+    }}>
       <FormInput title="아이디" />
       <FormInput title="비밀번호" security />
-      <Button bg="#484A5E" h="50px" borderRadius="10px" mb="25px">
+      {/* <Button bg="#484A5E" h="50px" borderRadius="10px" mb="25px">
         <Center>
           <Text fontWeight="700" color="white" fontSize="18px">
             로그인
           </Text>
         </Center>
-      </Button>
+      </Button> */}
       <Center>
         {/* todo: fix layout */}
         <HStack >
