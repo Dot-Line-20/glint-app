@@ -24,7 +24,6 @@ export default function InputInfo() {
       <FormInput title="이메일" />
       <FormInput title="생년월일" icon="Calendar"/>
       <Next title="다음"/>
-      <Text style={{fontFamily: 'Pretendard'}}>로그인</Text>
     </FullProcess>
   )
 }

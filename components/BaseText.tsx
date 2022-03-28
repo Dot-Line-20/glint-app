@@ -55,9 +55,8 @@ function H(props: HProps) {
 
   return (
     <Text
-      // fontWeight="700"
+      fontWeight="700"
       color="gray.100"
-      style={{fontFamily: 'Pretendard', fontWeight: '700'}}
       {...passProps}
     >
       {props.children}

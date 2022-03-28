@@ -24,6 +24,7 @@ export default function FormInput({title, security = false, icon}: Props) {
       <FactoryInput
         pb="10px"
         mt="13px"
+        h="32px"
         position="relative"
         fontSize="18px"
         lineHeight="22px"
@@ -31,12 +32,12 @@ export default function FormInput({title, security = false, icon}: Props) {
         secureTextEntry={security}
         borderBottomColor={rawColor('gray.400')}
         selectionColor={rawColor('gray.300')}
+        fontWeight="600"
         style={{
           color: rawColor('gray.100'),
-          fontFamily: 'Pretendard-Bold',
           fontSize: 18,
           lineHeight: 22,
-          fontWeight: '600'
+          fontFamily: 'Pretendard-SemiBold'
         }}
       />
       {Icon ? (

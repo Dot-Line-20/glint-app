@@ -6,6 +6,9 @@ const typography = {
       500: {
         normal: 'Pretendard-Medium',
       },
+      600: {
+        normal: 'Pretendard-SemiBold'
+      },
       700: {
         normal: 'Pretendard-Bold',
       },
