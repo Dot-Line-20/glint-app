@@ -1,10 +1,10 @@
 import React from "react";
-import Process from '../Process'
+import {FullProcess} from '../Process'
 
 export default function EmailAuth() {
   return (
-    <Process >
+    <FullProcess title='본인인증'>
 
-    </Process>
+    </FullProcess>
   )
 }

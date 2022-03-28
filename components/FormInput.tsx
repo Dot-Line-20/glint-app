@@ -1,28 +1,56 @@
-import React from 'react'
-import { Box, Text, Factory } from 'native-base'
-import { TextInput } from 'react-native'
+import React, {Suspense} from 'react'
+import {Box, Text, Factory, Pressable} from 'native-base'
+import {TextInput} from 'react-native'
 import rawColor from '../lib/colorCode'
+import {ExplainText} from './BaseText'
 
 type Props = {
   title: string
   security?: boolean
+  icon?: 'Calendar'
 }
 
-export default function FormInput({ title, security = false }: Props) {
+export default function FormInput({title, security = false, icon}: Props) {
   const FactoryInput = Factory(TextInput)
-  
+
+  let Icon = null
+  if (icon === 'Calendar') {
+    Icon = Factory(React.lazy(() => import('../images/Calendar.svg')))
+  }
+
   return (
     <Box mb="50px">
-      <Text fontSize="14px" fontWeight="600">
-        {title}
-      </Text>
+      <ExplainText type="2">{title}</ExplainText>
       <FactoryInput
-        h="40px"
+        pb="10px"
+        mt="13px"
+        position="relative"
+        fontSize="18px"
+        lineHeight="22px"
         borderBottomWidth="2"
-        borderBottomColor="#DEDDE8"
         secureTextEntry={security}
-        selectionColor={rawColor('gray.200')}
+        borderBottomColor={rawColor('gray.400')}
+        selectionColor={rawColor('gray.300')}
+        style={{
+          color: rawColor('gray.100'),
+          fontFamily: 'Pretendard-Bold',
+          fontSize: 18,
+          lineHeight: 22,
+          fontWeight: '600'
+        }}
       />
+      {Icon ? (
+        <Suspense fallback={<></>}>
+          <Pressable
+            onPress={() => console.log('pressed')}
+            position="absolute"
+            bottom="10px"
+            right="0"
+          >
+            <Icon w="24px"/>
+          </Pressable>
+        </Suspense>
+      ) : null}
     </Box>
   )
 }

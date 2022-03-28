@@ -6,7 +6,7 @@ import Initial from './routers/Initial'
 import { useFonts } from 'expo-font'
 import AppLoading from 'expo-app-loading'
 import { StatusBar } from 'expo-status-bar'
-import theme from './theme/theme'
+import theme from './theme'
 
 const Stack = createNativeStackNavigator()
 
@@ -15,7 +15,8 @@ export default function App() {
   let [fontLoaded, error] = useFonts({
     'Pretendard-Bold': require('./assets/fonts/Pretendard-Bold.otf'),
     'Pretendard-Medium': require('./assets/fonts/Pretendard-Medium.otf'),
-    'Pretendard-Light': require('./assets/fonts/Pretendard-Light.otf')
+    'Pretendard-Light': require('./assets/fonts/Pretendard-Light.otf'),
+    'Pretendard': require('./assets/fonts/PretendardVariable.ttf')
   })
 
   if(!fontLoaded) {

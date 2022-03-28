@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavigationContainer, StackActions } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import InputInfo from './InputInfo'
+import InputInfo from './InputProfile'
 import EmailAuth from './EmailAuth'
 
 const Stack = createNativeStackNavigator()
