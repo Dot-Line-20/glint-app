@@ -1,25 +1,21 @@
-import { extendTheme } from 'native-base'
+import {extendTheme} from 'native-base'
 
 const typography = {
   fontConfig: {
     Pretendard: {
       500: {
-        
         normal: 'Pretendard-Medium',
       },
       700: {
-        normal: 'Pretendard',
-      },
-      400: {
-        normal: 'Pretendard-Light',
+        normal: 'Pretendard-Bold',
       },
     },
   },
-  // fonts: {
-  //   heading: 'Pretendard',
-  //   body: 'Pretendard',
-  //   mono: 'Pretendard',
-  // },
+  fonts: {
+    heading: 'Pretendard',
+    body: 'Pretendard',
+    mono: 'Pretendard',
+  },
   letterSpacings: {
     md: '-0.01em',
   },
@@ -40,10 +36,7 @@ const colors = {
   },
 }
 
-const theme = extendTheme({
-  // ...typography,
-  ...colors,
-})
+const theme = extendTheme({...typography, ...colors})
 
 export default theme
-export { colors }
+export {colors}
