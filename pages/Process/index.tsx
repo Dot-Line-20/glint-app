@@ -1,28 +1,16 @@
 import React from 'react'
+import { VStack, Stack } from 'native-base'
 import {
-  View,
-  VStack,
-  Text,
-  Pressable,
-  Center,
-  Button,
-  Box,
-  Stack,
-  HStack,
-} from 'native-base'
-import {GestureResponderEvent} from 'react-native'
+  GestureResponderEvent,
+  KeyboardAvoidingView,
+  Dimensions,
+} from 'react-native'
 import Back from './Back'
-import {H, ExplainText} from '../../components/BaseText'
-import Next from './Next'
+import { H, ExplainText } from '../../components/BaseText'
 
 type Props = {
   title: string
   info?: string
-  button?: {
-    title?: string
-    position?: 'bottom' | 'stick' // stick: it doesn't have space between children
-    onPress?: (event: GestureResponderEvent) => void
-  }
   children?: React.ReactNode
 }
 
@@ -38,19 +26,26 @@ type Props = {
   },
 } */
 
-function FullProcess({title, info, button, children}: Props) {
+function FullProcess({ title, info, children }: Props) {
   return (
-    <VStack px="25px" py="63px">
-      <Back />
-      <VStack mt="30px" mb="50px">
-        <H type="1" mb="8px">
-          {title}
-        </H>
-        <ExplainText type="1">{info}</ExplainText>
-      </VStack>
-      {children}
-    </VStack>
+    <KeyboardAvoidingView>
+      <Stack
+        px="25px"
+        py="63px"
+        h={Dimensions.get('window').height}
+        position="relative"
+      >
+        <Back />
+        <VStack mt="30px" mb="50px">
+          <H type="1" mb="8px">
+            {title}
+          </H>
+          <ExplainText type="1">{info}</ExplainText>
+        </VStack>
+        {children}
+      </Stack>
+    </KeyboardAvoidingView>
   )
 }
 
-export {FullProcess}
+export { FullProcess }

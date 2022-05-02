@@ -1,10 +1,17 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
+    "experimentalDecorators": true,
     "target": "ES6",
     "jsx": "react",
     "strict": true,
-    "module": "esnext"
+    "module": "esnext",
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "paths": {
+      "*": ["types/*.d.ts"]
+    }
   },
   "exclude": [
     "./node_modules/**/*"

@@ -5,7 +5,7 @@ import { View, Center, Text, Button } from 'native-base'
 import type { NativeStackScreenProps } from '@react-navigation/native-stack'
 
 import Login from '../pages/Login'
-import SignUp from '../pages/SignUp/SignUp'
+import SignUp from '../pages/SignUp'
 
 const Stack = createNativeStackNavigator()
 

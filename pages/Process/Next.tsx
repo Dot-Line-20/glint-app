@@ -1,18 +1,27 @@
 import React from 'react'
-import {Button, Center, Text, IBoxProps} from 'native-base'
-import {GestureResponderEvent} from 'react-native'
-import {H} from '../../components/BaseText'
+import { Button, Center, IButtonProps } from 'native-base'
+import { GestureResponderEvent } from 'react-native'
+import { H } from '../../components/BaseText'
 
-type Props = {
-  title?: string
-  onPress?: (event: GestureResponderEvent) => void
+interface Props extends IButtonProps {
+  title: string
+  pressHandler?: (event: GestureResponderEvent) => void
 }
 
-export default function Next(props: Props & IBoxProps) {
+export default function Next({ title, pressHandler, ...props }: Props) {
   return (
-    <Button bg="#484A5E" h="50px" borderRadius="10px" onPress={props.onPress}>
+    <Button
+      bgColor="#484A5E"
+      w="100%"
+      h="50px"
+      borderRadius="10px"
+      onPress={pressHandler}
+      {...props}
+    >
       <Center>
-        <H type="4" color="#fff">{props.title}</H>
+        <H type="4" color="#fff">
+          {title}
+        </H>
       </Center>
     </Button>
   )

@@ -36,6 +36,10 @@ const colors = {
       400: '#e8e8e8',
       500: '#f3f3f3',
     },
+    sys: {
+      green: '#95c235',
+      red: '#dd3b3b',
+    },  
   },
 }
 

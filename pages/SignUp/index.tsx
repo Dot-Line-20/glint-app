@@ -6,7 +6,7 @@ import EmailAuth from './EmailAuth'
 
 const Stack = createNativeStackNavigator()
 
-export default function SignUp() {
+export default function SignUp(): JSX.Element {
   return (
       <Stack.Navigator initialRouteName='InputInfo' screenOptions={{
         headerShown: false,
