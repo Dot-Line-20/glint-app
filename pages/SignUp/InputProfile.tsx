@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { FullProcess } from '../Process'
 import {
   Box,
@@ -10,16 +10,14 @@ import {
   Input,
 } from 'native-base'
 import FormInput from '../../components/FormInput'
-import { NavigationContext } from '@react-navigation/native'
 import Next from '../Process/Next'
 import Calendar from '../../images/Calendar.svg'
 import { width, height } from '../../lib/screen'
-import { H, ExplainText } from '../../components/BaseText'
+import { H, Explain } from '../../components/BaseText'
 import Profile from './profile.dto'
 import { validateOrReject, ValidationError } from 'class-validator'
 
-export default function InputInfo({navigation: {navigate}}) {
-  // const navigation = useContext(NavigationContext)
+export default function InputInfo() {
   const [calendarOpens, setCalendarOpens] = useState<boolean>(false)
   const [profile, setProfile] = useState<Profile>({
     name: '',
@@ -68,9 +66,9 @@ export default function InputInfo({navigation: {navigate}}) {
           value={profile.birth[birthState]}
           keyboardType="number-pad"
         />
-        <ExplainText type="1" textAlign="center">
+        <Explain type="1" textAlign="center">
           {unit}
-        </ExplainText>
+        </Explain>
       </HStack>
     )
   }
@@ -155,8 +153,8 @@ export default function InputInfo({navigation: {navigate}}) {
             try {
               await validateOrReject(Object.assign(new Profile(), profile), {
                 validationError: { target: false },
+                stopAtFirstError: true,
               })
-              
             } catch (error) {
               const foundError: { [k: string]: string } = {}
               for (const {

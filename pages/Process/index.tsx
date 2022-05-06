@@ -6,7 +6,7 @@ import {
   Dimensions,
 } from 'react-native'
 import Back from './Back'
-import { H, ExplainText } from '../../components/BaseText'
+import { H, Explain } from '../../components/BaseText'
 
 type Props = {
   title: string
@@ -40,7 +40,7 @@ function FullProcess({ title, info, children }: Props) {
           <H type="1" mb="8px">
             {title}
           </H>
-          <ExplainText type="1">{info}</ExplainText>
+          <Explain type="1">{info}</Explain>
         </VStack>
         {children}
       </Stack>

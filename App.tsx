@@ -1,6 +1,5 @@
 import React from 'react'
 import { NativeBaseProvider } from 'native-base'
-import Initial from './routers/Initial'
 import { useFonts } from 'expo-font'
 import AppLoading from 'expo-app-loading'
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
@@ -33,7 +32,6 @@ export default function App() {
 
   return (
     <NativeBaseProvider theme={theme}>
-        {/* <Initial /> */}
         <NavigationContainer theme={navigationTheme}>
           <SignUp/>
         </NavigationContainer>
