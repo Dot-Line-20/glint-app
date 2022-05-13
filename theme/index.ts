@@ -1,4 +1,4 @@
-import {extendTheme} from 'native-base'
+import { extendTheme } from 'native-base'
 
 const typography = {
   fontConfig: {
@@ -7,7 +7,7 @@ const typography = {
         normal: 'Pretendard-Medium',
       },
       600: {
-        normal: 'Pretendard-SemiBold'
+        normal: 'Pretendard-SemiBold',
       },
       700: {
         normal: 'Pretendard-Bold',
@@ -39,11 +39,12 @@ const colors = {
     sys: {
       green: '#95c235',
       red: '#dd3b3b',
-    },  
+    },
+    blue: '#1372a7',
   },
 }
 
-const theme = extendTheme({...typography, ...colors})
+const theme = extendTheme({ ...typography, ...colors })
 
 export default theme
-export {colors}
+export { colors }
