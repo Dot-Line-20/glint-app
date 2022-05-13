@@ -10,10 +10,12 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./",
     "paths": {
-      "*": ["types/*.d.ts"]
+      // "*": ["types/*.d.ts"],
+      "@components/*": ["./components/*"],
+      "@images/*": ["./images/*"],
+      "@pages/*": ["./pages/*"],
+      "@CTypes/*": ["./types/*"]
     }
   },
-  "exclude": [
-    "./node_modules/**/*"
-  ]
+  "exclude": ["./node_modules/**/*"]
 }
