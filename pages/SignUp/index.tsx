@@ -1,20 +1,6 @@
-import React from 'react'
-import { NavigationContainer, StackActions } from '@react-navigation/native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import InputInfo from './InputProfile'
+import InputProfile from './InputProfile'
 import EmailAuth from './EmailAuth'
+import EmailConfirm from './EmailConfirm'
+import InputDetailProfile from './InputDetailProfile'
 
-const Stack = createNativeStackNavigator()
-
-export default function SignUp(): JSX.Element {
-  return (
-      <Stack.Navigator initialRouteName='InputInfo' screenOptions={{
-        headerShown: false,
-      }}>
-        <Stack.Screen name="InputInfo" component={InputInfo} />
-        <Stack.Screen name="EmailAuth" component={EmailAuth}/>
-      </Stack.Navigator>
-    // <Stack.Group>
-    // </Stack.Group>
-  )
-}
+export { InputProfile, EmailAuth, EmailConfirm, InputDetailProfile }

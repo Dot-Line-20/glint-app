@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Text } from 'native-base'
 import { MainProps } from './type'
 
-export default function Main({ children, ...props }: MainProps): JSX.Element {
+export default memo(function Main({
+  children,
+  ...props
+}: MainProps): JSX.Element {
   return (
     <Text
       fontWeight="400"
@@ -14,4 +17,4 @@ export default function Main({ children, ...props }: MainProps): JSX.Element {
       {children}
     </Text>
   )
-}
+})

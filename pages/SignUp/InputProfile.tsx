@@ -1,115 +1,121 @@
-import React, { useState } from 'react'
-import { FullProcess } from '../Process'
-import {
-  Box,
-  Pressable,
-  View,
-  HStack,
-  VStack,
-  FormControl,
-  Input,
-} from 'native-base'
-import FormInput from '../../components/FormInput'
-import Next from '../Process/Next'
-import Calendar from '../../images/Calendar.svg'
-import { width, height } from '../../lib/screen'
-import { H, Explain } from '../../components/BaseText'
-import Profile from './profile.dto'
+import React, { useState, memo } from 'react'
+import { Box, Pressable, View, HStack, VStack, Input } from 'native-base'
 import { validateOrReject, ValidationError } from 'class-validator'
+import { NativeStackHeaderProps } from '@react-navigation/native-stack'
 
-export default function InputInfo() {
+import { H, Explain } from '@components/BaseText'
+import FormInput from '@components/FormInput'
+import { width, height } from '@lib/screen'
+import { MainProcess } from '@pages/Process'
+import Next from '@pages/Process/Next'
+import Calendar from '@images/Calendar.svg'
+import { Profile } from './profile.dto'
+
+export default memo(function InputInfo({ navigation }: NativeStackHeaderProps) {
+  const itemConfig = [
+    ['년', '34'],
+    ['월', '25'],
+    ['일', '25'],
+  ]
   const [calendarOpens, setCalendarOpens] = useState<boolean>(false)
   const [profile, setProfile] = useState<Profile>({
     name: '',
     email: '',
-    birth: {
-      year: '',
-      month: '',
-      date: '',
-    },
+    birth: Array(itemConfig.length).fill(''),
   })
   const [profileError, setProfileError] = useState<{
     [k: string]: string | undefined
   }>()
+  const inputRefs = [...Array(itemConfig.length)].map(() =>
+    React.useRef<HTMLInputElement>()
+  )
 
-  const BirthInput = (
-    unit: string,
-    flex: string,
-    birthState: keyof typeof profile.birth
-  ): JSX.Element => {
-    return (
-      <HStack
-        borderRadius="10px"
-        bgColor="gray.500"
-        p="15px"
-        flex={flex}
-        alignItems="center"
-        justifyContent="space-between"
-      >
-        <Input
-          fontSize="20px"
-          p="0"
-          flex="1"
-          borderColor="gray.500"
-          textAlign="center"
-          fontWeight="700"
-          _focus={{ borderColor: 'gray.500' }}
-          onChangeText={(text: string) =>
-            setProfile({
-              ...profile,
-              birth: {
-                ...profile.birth,
-                [birthState]: text.replace(/\D/g, ''),
-              },
-            })
-          }
-          value={profile.birth[birthState]}
-          keyboardType="number-pad"
-        />
-        <Explain type="1" textAlign="center">
-          {unit}
-        </Explain>
-      </HStack>
-    )
+  const BirthInput = () => {
+    const tempBirth: string[] = []
+
+    const Inputs = itemConfig.map((item, i) => {
+      const [unit, flex] = item
+
+      return (
+        <HStack
+          p="15px"
+          borderRadius="10px"
+          bgColor="gray.500"
+          flex={flex}
+          alignItems="center"
+          justifyContent="space-between"
+          key={i}
+        >
+          <Input
+            p="0"
+            flex="1"
+            fontSize="20px"
+            fontWeight="700"
+            textAlign="center"
+            ref={inputRefs[i]}
+            borderColor="gray.500"
+            keyboardType="number-pad"
+            _focus={{ borderColor: 'gray.500' }}
+            returnKeyType={itemConfig.length !== i + 1 ? 'next' : 'default'}
+            onChangeText={(text: string): void => {
+              text.replace(/\D/g, '')
+              tempBirth[i] = text
+            }}
+            onSubmitEditing={(): void => {
+              if (i + 1 !== itemConfig.length) {
+                inputRefs[i + 1].current?.focus()
+                return
+              }
+
+              setProfile({ ...profile, birth: tempBirth })
+              setCalendarOpens(false)
+            }}
+          />
+          <Explain type="1" textAlign="center">
+            {unit}
+          </Explain>
+        </HStack>
+      )
+    })
+
+    return <HStack space="15px">{Inputs}</HStack>
   }
 
   return (
-    <FullProcess title="회원가입" info="'앱 이름'을 시작해봐요">
-      <FormControl>
-        <FormInput
-          title="이름"
-          onChangeText={(text: string) => {
-            setProfile({ ...profile, name: text })
-          }}
-          status={profileError?.name}
-        />
-        <FormInput
-          title="이메일"
-          keyboardType="email-address"
-          onChangeText={(text: string) => {
-            setProfile({ ...profile, email: text })
-          }}
-          status={profileError?.email}
-        />
-        <FormInput
-          title="생년월일"
-          isDisabled
-          rightElement={
-            <Pressable onPress={() => setCalendarOpens(true)}>
-              <Calendar />
-            </Pressable>
-          }
-          value={((): string => {
-            const {
-              birth: { year, month, date },
-            } = profile
-            return [year, month, date].some((v: string) => v === '')
-              ? ' '
-              : `${year}년 ${month}월 ${date}일`
-          })()}
-          status={profileError?.birth}
-        />
-      </FormControl>
+    <MainProcess title="회원가입" info="'앱 이름'을 시작해봐요">
+      <FormInput
+        title="이름"
+        onChangeText={(text: string): void => {
+          setProfile({ ...profile, name: text })
+        }}
+        status={profileError?.name}
+      />
+      <FormInput
+        title="이메일"
+        keyboardType="email-address"
+        onChangeText={(text: string): void => {
+          setProfile({ ...profile, email: text })
+        }}
+        status={profileError?.email}
+      />
+      <FormInput
+        title="생년월일"
+        isDisabled
+        rightElement={
+          <Pressable
+            onPress={(): void => {
+              setCalendarOpens(true)
+            }}
+          >
+            <Calendar />
+          </Pressable>
+        }
+        value={((): string => {
+          if (profile.birth.includes('')) return ''
+          return `${profile.birth[0]}년 ${profile.birth[1]}월 ${profile.birth[2]}일`
+        })()}
+        status={profileError?.birth}
+      />
 
       {/* birth input handler */}
       {calendarOpens && (
@@ -132,20 +138,12 @@ export default function InputInfo() {
               borderRadius="10px"
             >
               <H type="3">생일 설정</H>
-              <FormControl>
-                <HStack>
-                  {BirthInput('년', '34', 'year')}
-                  <Box w="15px" />
-                  {BirthInput('월', '25', 'month')}
-                  <Box w="15px" />
-                  {BirthInput('일', '25', 'date')}
-                </HStack>
-              </FormControl>
+              <BirthInput />
             </VStack>
           </HStack>
         </View>
       )}
-      <Box flex="1"></Box>
+      <Box flex="1" />
       <Next
         title="다음"
         pressHandler={() => {
@@ -155,6 +153,10 @@ export default function InputInfo() {
                 validationError: { target: false },
                 stopAtFirstError: true,
               })
+
+              setProfileError({})
+
+              navigation.navigate('EmailAuth', { ...profile })
             } catch (error) {
               const foundError: { [k: string]: string } = {}
               for (const {
@@ -166,9 +168,10 @@ export default function InputInfo() {
               setProfileError(foundError)
             }
           }
+
           validationCheck()
         }}
       />
-    </FullProcess>
+    </MainProcess>
   )
-}
+})

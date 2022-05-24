@@ -9,47 +9,39 @@ import {
   Validate,
   Matches,
 } from 'class-validator'
+import { default as ISO8601Validator } from 'validator/lib/isISO8601'
 
 @ValidatorConstraint({ name: 'isRealDate', async: false })
 class RealDate implements ValidatorConstraintInterface {
-  validate({ year, month, date }: { [key: string]: string }) {
-    const [y, m, d] = [+year, +month, +date]
-    return !(
-      y < 1900 ||
-      y > new Date().getFullYear() ||
-      m < 1 ||
-      m > 12 ||
-      d < 1 ||
-      d > new Date(y, m, 0).getDate()
+  public validate(dateArray: string[]): boolean {
+    const ISO8601String = dateArray
+      .map((n, i) => (i ? this.normalize(n) : n))
+      .join('-')
+
+    return (
+      ISO8601Validator(ISO8601String) && new Date() > new Date(ISO8601String)
     )
   }
-  defaultMessage() {
+
+  public defaultMessage(): string {
     return 'Not a Real Date'
+  }
+
+  public normalize(text: string): string {
+    return ('00' + text).slice(-2)
   }
 }
 
-export default class Profile {
+export class Profile {
   @IsString()
-  @MinLength(1, { message: '이름은 한 글자 이상이어야 해요' })
-  @MaxLength(30, { message: '이름은 서른 글자이하야 해요' })
   @Matches(/\w+/, { message: '알파벳과 숫자, _(밑줄)만 포함해야 해요' })
-  name!: string
+  @MaxLength(30, { message: '이름은 서른 글자이하야 해요' })
+  @MinLength(1, { message: '이름은 한 글자 이상이어야 해요' })
+  public name!: string
 
-  @IsEmail({},{message: '올바른 이메일이 아니에요'})
-  email!: string
+  @IsEmail({}, { message: '올바른 이메일이 아니에요' })
+  public email!: string
 
-  @ValidateNested()
-  @Validate(RealDate, {message: '올바른 날짜가 아니에요'})
-  birth!: Birth
-}
-
-class Birth {
-  @IsString()
-  year!: string
-
-  @IsString()
-  month!: string
-
-  @IsString()
-  date!: string
+  @Validate(RealDate, { message: '올바른 날짜가 아니에요' })
+  public birth!: Array<string>
 }

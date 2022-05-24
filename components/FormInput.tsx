@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Box, Input, Text } from 'native-base'
-import { ExplainText } from './BaseText'
+import { Explain } from './BaseText'
 import { IFormInput } from './type'
 
-export default function FormInput({ title, status, ...props }: IFormInput) {
+export default memo(function FormInput({
+  title,
+  status,
+  ...props
+}: IFormInput) {
   return (
     <Box mb="50px">
-      <ExplainText type="2">{title}</ExplainText>
+      <Explain type="2">{title}</Explain>
       <Input
         p="0px"
         pb="10px"
@@ -38,4 +42,4 @@ export default function FormInput({ title, status, ...props }: IFormInput) {
       </Text>
     </Box>
   )
-}
+})

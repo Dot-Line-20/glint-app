@@ -1,4 +1,5 @@
 import { extendTheme } from 'native-base'
+import { DefaultTheme } from '@react-navigation/native'
 
 const typography = {
   fontConfig: {
@@ -46,5 +47,13 @@ const colors = {
 
 const theme = extendTheme({ ...typography, ...colors })
 
+const navigationTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: '#fff',
+  },
+}
+
 export default theme
-export { colors }
+export { colors, navigationTheme }

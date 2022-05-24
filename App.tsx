@@ -2,11 +2,17 @@ import React from 'react'
 import { NativeBaseProvider } from 'native-base'
 import { useFonts } from 'expo-font'
 import AppLoading from 'expo-app-loading'
-import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
+import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import theme from './theme'
+import theme, { navigationTheme } from './theme'
 
-import SignUp from './pages/SignUp'
+import {
+  InputProfile,
+  EmailAuth,
+  EmailConfirm,
+  InputDetailProfile,
+} from '@pages/SignUp'
+import Login from '@pages/Login'
 
 export default function App() {
   const [fontLoaded] = useFonts({
@@ -20,21 +26,22 @@ export default function App() {
     return <AppLoading />
   }
 
-  const navigationTheme = {
-    ...DefaultTheme,
-    colors: {
-      ...DefaultTheme.colors,
-      background: '#fff',
-    },
-  }
-
   const Stack = createNativeStackNavigator()
 
   return (
     <NativeBaseProvider theme={theme}>
-        <NavigationContainer theme={navigationTheme}>
-          <SignUp/>
-        </NavigationContainer>
+      <NavigationContainer theme={navigationTheme}>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="InputProfile" component={InputProfile} />
+          <Stack.Screen name="EmailAuth" component={EmailAuth} />
+          <Stack.Screen name="EmailConfirm" component={EmailConfirm} />
+          <Stack.Screen
+            name="InputDetailProfile"
+            component={InputDetailProfile}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
     </NativeBaseProvider>
   )
 }

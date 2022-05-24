@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Text } from 'native-base'
 import { HProps, BaseTextPreset } from './type'
 
@@ -12,9 +12,13 @@ export const heading: BaseTextPreset = {
   6: ['14px', '17px'],
 }
 
-export default function H({ type, children, ...props }: HProps): JSX.Element {
+export default memo(function H({
+  type,
+  children,
+  ...props
+}: HProps): JSX.Element {
   const [size, height]: string[] = heading[type]
-  
+
   return (
     <Text
       fontWeight="700"
@@ -26,4 +30,4 @@ export default function H({ type, children, ...props }: HProps): JSX.Element {
       {children}
     </Text>
   )
-}
+})

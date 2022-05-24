@@ -10,6 +10,7 @@ module.exports = {
           '^@components(.+)': './components/\\1',
           '^@images(.+)': './images/\\1',
           '^@CTypes(.+)': './types/\\1',
+          '^@lib(.+)': './lib/\\1',
         },
         extensions: [
           '.ios.js',

@@ -1,40 +1,41 @@
-import React from 'react'
-import { VStack, Stack } from 'native-base'
-import {
-  GestureResponderEvent,
-  KeyboardAvoidingView,
-  Dimensions,
-} from 'react-native'
+import React, { memo } from 'react'
+import { VStack, HStack, Text } from 'native-base'
+import { Dimensions } from 'react-native'
 import Back from './Back'
+import LeftArrow from '../../images/LeftArrow.svg'
 import { H, Explain } from '../../components/BaseText'
+import { ProcessProps, MainProcessProps, SubProcessProps } from './type'
 
-type Props = {
-  title: string
-  info?: string
-  children?: React.ReactNode
+const contextDefault: { icon: JSX.Element } = {
+  icon: <LeftArrow width="100%" />,
+}
+export type ContextDefault = typeof contextDefault
+export const ProcessContext: React.Context<typeof contextDefault> =
+  React.createContext(contextDefault)
+
+function Process({ children }: ProcessProps): JSX.Element {
+  return (
+    <VStack
+      px="25px"
+      py="63px"
+      h={Dimensions.get('window').height}
+      w="100%"
+      position="relative"
+    >
+      {children}
+    </VStack>
+  )
 }
 
-/* Process.defaultProps = {
-  title: {
-    type: 'large',
-  },
-  info: '',
-  button: {
-    title: '',
-    position: 'bottom',
-    onPress: () => {},
-  },
-} */
-
-function FullProcess({ title, info, children }: Props) {
+export const MainProcess = memo(function MainProcess({
+  title,
+  info,
+  children,
+  defaultValue = contextDefault,
+}: MainProcessProps): JSX.Element {
   return (
-    <KeyboardAvoidingView>
-      <Stack
-        px="25px"
-        py="63px"
-        h={Dimensions.get('window').height}
-        position="relative"
-      >
+    <ProcessContext.Provider value={defaultValue}>
+      <Process>
         <Back />
         <VStack mt="30px" mb="50px">
           <H type="1" mb="8px">
@@ -43,9 +44,32 @@ function FullProcess({ title, info, children }: Props) {
           <Explain type="1">{info}</Explain>
         </VStack>
         {children}
-      </Stack>
-    </KeyboardAvoidingView>
+      </Process>
+    </ProcessContext.Provider>
   )
-}
+})
 
-export { FullProcess }
+export const SubProcess = memo(function SubProcess({
+  title,
+  children,
+  defaultValue = contextDefault,
+}: SubProcessProps): JSX.Element {
+  return (
+    <ProcessContext.Provider value={defaultValue}>
+      <Process>
+        <HStack mb="70px">
+          <Back position="absolute" />
+          <Text
+            fontWeight="500"
+            fontSize="18px"
+            lineHeight="22px"
+            margin="auto"
+          >
+            {title}
+          </Text>
+        </HStack>
+        {children}
+      </Process>
+    </ProcessContext.Provider>
+  )
+})

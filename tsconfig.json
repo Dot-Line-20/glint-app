@@ -12,9 +12,10 @@
     "paths": {
       // "*": ["types/*.d.ts"],
       "@components/*": ["./components/*"],
-      "@images/*": ["./images/*"],
+      "@images/*": ["./images/*.svg"],
       "@pages/*": ["./pages/*"],
-      "@CTypes/*": ["./types/*"]
+      "@CTypes/*": ["./types/*"],
+      "@lib/*": ["./lib/*"]
     }
   },
   "exclude": ["./node_modules/**/*"]
